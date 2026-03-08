@@ -1,7 +1,18 @@
 const express = require("express")
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const cors = require('cors');
 const app = express();
 const allRoutes = require('./routes/index.route.js');
+
+
+// 2. Enable CORS with wildcard (*)
+// This allows all origins, methods, and headers
+app.use(cors({
+    origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 
 app.use(express.json());
 
