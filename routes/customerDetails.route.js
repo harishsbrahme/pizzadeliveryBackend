@@ -13,4 +13,6 @@ router.get('/getAllCustomerdetails', customerDetailsController.getAllCustomerdet
 
 router.post('/getCustomerdetailsbyId', customerDetailsController.getCustomerdetailsbyId);
 
+router.post('/loginCustomer', customerDetailsController.loginCustomer);
+
 module.exports = router;

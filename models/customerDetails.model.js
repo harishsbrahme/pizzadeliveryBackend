@@ -6,7 +6,7 @@ const customerDetailsSchema = new Schema({
   customerName:String,
   mobileNumber:Number,
   address:String,
-  
+  password:String,
 })
 
 module.exports = mongoose.model('customerDetails',customerDetailsSchema)

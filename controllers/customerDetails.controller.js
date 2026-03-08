@@ -15,6 +15,50 @@ const saveCustomerdetails = async (req, res) => {
     }
 };
 
+const loginCustomer = async (req, res) => {
+    try {
+        const { mobileNumber, password } = req.body;
+
+        // 1. Find the customer in the database by mobile number
+        const customer = await Customer.findOne({ mobileNumber: mobileNumber });
+
+        // 2. Check if customer exists
+        if (!customer) {
+            return res.status(200).json({ 
+                success: false, 
+                message: "Mobile number not registered." 
+            });
+        }
+
+        // 3. Simple Password Comparison (Normal Flow)
+        if (customer.password === password) {
+            // SUCCESS
+            res.status(200).json({
+                success: true,
+                message: "Login successful!",
+                data: {
+                    _id: customer._id,
+                    customerName: customer.customerName,
+                    mobileNumber: customer.mobileNumber,
+                    address: customer.address
+                }
+            });
+        } else {
+            // WRONG PASSWORD
+            res.status(200).json({ 
+                success: false, 
+                message: "Incorrect password." 
+            });
+        }
+
+    } catch (error) {
+        res.status(500).json({ 
+            success: false, 
+            message: "Server error occurred." 
+        });
+    }
+};
+
 const updateCustomerdetails = async (req, res) => {
     try {
         const updateData = req.body;
@@ -136,5 +180,6 @@ module.exports = {
     updateCustomerdetails,
     deleteCustomerdetails,
     getAllCustomerdetails,
-    getCustomerdetailsbyId
+    getCustomerdetailsbyId,
+    loginCustomer
 };
