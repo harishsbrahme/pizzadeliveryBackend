@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose");
 const cors = require('cors');
+require('dotenv').config();
 const app = express();
 const allRoutes = require('./routes/index.route.js');
 
@@ -27,7 +28,7 @@ app.get("/",(req,res)=>{
 
 const connectdb = async () =>{
     try {
-        const connection = await mongoose.connect("mongodb://localhost:27017/pizzaDelievery");
+        const connection = await mongoose.connect(process.env.MONGO_URI);
         console.log("mongodb connected");
         
     } catch (error) {
