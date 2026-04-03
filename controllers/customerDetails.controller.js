@@ -20,7 +20,7 @@ const loginCustomer = async (req, res) => {
         const { mobileNumber, password } = req.body;
 
         // 1. Find the customer in the database by mobile number
-        const customer = await Customer.findOne({ mobileNumber: mobileNumber });
+        const customer = await customerdetailsModel.findOne({ mobileNumber: mobileNumber });
 
         // 2. Check if customer exists
         if (!customer) {
